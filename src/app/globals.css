@@ -1,26 +1,53 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@theme {
+  /* Brand palette */
+  --color-off-white: #FAFAF8;
+  --color-sand:      #F1EFE8;
+  --color-stone:     #D3D1C7;
+  --color-warm-gray: #888780;
+  --color-slate:     #5F5E5A;
+  --color-charcoal:  #2C2C2A;
+  --color-forest:    #3B6D11;
+  --color-olive:     #639922;
+  --color-mist:      #EAF3DE;
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  /* Typography */
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  /* Animations */
+  --animate-fade-up: fade-up 0.6s ease-out both;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background-color: var(--color-off-white);
+  color: var(--color-charcoal);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Scroll-triggered fade-up — JS adds .in-view via IntersectionObserver */
+.card-animate {
+  opacity: 0;
+  transform: translateY(16px);
+  will-change: opacity, transform;
+}
+
+.card-animate.in-view {
+  animation: fade-up 0.6s ease-out var(--delay, 0ms) both;
 }
