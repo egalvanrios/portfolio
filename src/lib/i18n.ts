@@ -363,7 +363,7 @@ const es: Translations = {
   about: {
     role: 'UX Manager & Design Leader',
     location: 'Querétaro, México · Disponible para trabajo remoto y reubicación',
-    pullQuote: 'Ayudo a las organizaciones a construir la función de diseño que realmente necesitan.',
+    pullQuote: 'Ayudo a las organizaciones a construir la experiencia de usuario que realmente necesitan.',
     paragraphs: [
       'Durante más de 20 años he liderado UX a escala para IBM, Deloitte Digital y Backbase — entregando productos empresariales para compañías globales como AT&T, Motorola Solutions y Lithia Motors, y grandes bancos en México y LATAM.',
       'He construido equipos de diseño desde cero, creado sistemas de diseño adoptados en organizaciones completas y aportado estructura a entornos donde la fragmentación lo ralentizaba todo.',
