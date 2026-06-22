@@ -231,7 +231,7 @@ const es: Translations = {
   },
   hero: {
     eyebrow: 'UX Manager & Design Leader',
-    headline: 'Construyo la función de diseño que las organizaciones realmente necesitan.',
+    headline: 'Diseñar la experiencia que las organizaciones realmente necesitan.',
     headlineHighlight: 'realmente necesitan.',
     subheading:
       '20 años liderando UX empresarial en IBM, Deloitte Digital y Backbase — equipos, sistemas y estrategia a escala.',
