@@ -1,11 +1,15 @@
 'use client'
 
 import { useState, useEffect } from 'react'
-import { navLinks, navConfig } from '@/lib/data'
+import { navLinks } from '@/lib/data'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 export default function Nav() {
   const [scrolled, setScrolled] = useState(false)
   const [menuOpen, setMenuOpen] = useState(false)
+  const { lang, toggle } = useLanguage()
+  const t = translations[lang].nav
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -29,28 +33,41 @@ export default function Nav() {
           href="/"
           className="font-semibold text-charcoal text-[18px] leading-none tracking-tight"
         >
-          {navConfig.logo}
+          {t.logo}
         </a>
 
         <ul className="hidden md:flex items-center gap-8 list-none m-0 p-0">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <li key={link.href}>
               <a
                 href={link.href}
                 className="text-sm text-slate hover:text-charcoal transition-colors duration-150"
               >
-                {link.label}
+                {t.links[i]}
               </a>
             </li>
           ))}
         </ul>
 
-        <a
-          href={navConfig.cta.href}
-          className="hidden md:inline-flex items-center gap-1 bg-charcoal text-off-white text-sm font-medium px-5 py-2.5 rounded-[4px] hover:bg-slate transition-colors duration-150"
-        >
-          {navConfig.cta.label}
-        </a>
+        <div className="hidden md:flex items-center gap-4">
+          {/* Language toggle */}
+          <button
+            onClick={toggle}
+            aria-label="Toggle language"
+            className="flex items-center gap-1 text-xs font-medium"
+          >
+            <span className={lang === 'en' ? 'text-charcoal' : 'text-stone'}>EN</span>
+            <span className="text-stone">|</span>
+            <span className={lang === 'es' ? 'text-charcoal' : 'text-stone'}>ES</span>
+          </button>
+
+          <a
+            href="/#contact"
+            className="inline-flex items-center gap-1 bg-charcoal text-off-white text-sm font-medium px-5 py-2.5 rounded-[4px] hover:bg-slate transition-colors duration-150"
+          >
+            {t.cta}
+          </a>
+        </div>
 
         {/* Hamburger */}
         <button
@@ -80,22 +97,33 @@ export default function Nav() {
       {/* Mobile drawer */}
       {menuOpen && (
         <div className="md:hidden bg-off-white border-t border-stone/50 px-5 py-8 flex flex-col gap-6">
-          {navLinks.map((link) => (
+          {navLinks.map((link, i) => (
             <a
               key={link.href}
               href={link.href}
               className="text-base font-medium text-charcoal"
               onClick={closeMenu}
             >
-              {link.label}
+              {t.links[i]}
             </a>
           ))}
+          <div className="flex items-center gap-4">
+            <button
+              onClick={toggle}
+              aria-label="Toggle language"
+              className="flex items-center gap-1 text-xs font-medium"
+            >
+              <span className={lang === 'en' ? 'text-charcoal' : 'text-stone'}>EN</span>
+              <span className="text-stone">|</span>
+              <span className={lang === 'es' ? 'text-charcoal' : 'text-stone'}>ES</span>
+            </button>
+          </div>
           <a
-            href={navConfig.cta.href}
+            href="/#contact"
             className="mt-2 inline-flex items-center justify-center bg-charcoal text-off-white text-sm font-medium px-5 py-3 rounded-[4px]"
             onClick={closeMenu}
           >
-            {navConfig.cta.label}
+            {t.cta}
           </a>
         </div>
       )}

@@ -2,11 +2,15 @@
 
 import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
-import { about, aboutParagraphs, certifications, expertise } from '@/lib/data'
+import { about, certifications } from '@/lib/data'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
 export default function About() {
   const leftRef  = useRef<HTMLDivElement>(null)
   const rightRef = useRef<HTMLDivElement>(null)
+  const { lang } = useLanguage()
+  const t = translations[lang].about
 
   useEffect(() => {
     const els = [leftRef.current, rightRef.current].filter(Boolean) as HTMLElement[]
@@ -39,7 +43,7 @@ export default function About() {
             className="card-animate w-80 shrink-0 max-md:w-full"
             style={{ '--delay': '0ms' } as CSSProperties}
           >
-            {/* Name — two lines */}
+            {/* Name — two lines (never translated) */}
             <h2
               className="font-semibold tracking-tight text-charcoal text-5xl max-md:text-4xl"
               style={{ lineHeight: 1.08 }}
@@ -48,13 +52,13 @@ export default function About() {
               <span className="block">{about.nameLines[1]}</span>
             </h2>
 
-            <p className="text-sm text-slate mt-4">{about.role}</p>
-            <p className="text-xs text-warm-gray mt-1">{about.location}</p>
+            <p className="text-sm text-slate mt-4">{t.role}</p>
+            <p className="text-xs text-warm-gray mt-1">{t.location}</p>
 
             {/* Divider */}
             <div className="border-t border-stone mt-8 mb-8" />
 
-            {/* Social links */}
+            {/* Social links (same in both languages) */}
             <div className="flex flex-col gap-2">
               {about.socialLinks.map((link) => (
                 <a
@@ -75,7 +79,7 @@ export default function About() {
 
             {/* Certifications */}
             <p className="text-xs tracking-widest text-warm-gray uppercase mb-3">
-              {about.certificationsLabel}
+              {t.certificationsLabel}
             </p>
             <div className="flex flex-col gap-1.5">
               {certifications.map((cert) => (
@@ -97,7 +101,7 @@ export default function About() {
               className="font-semibold tracking-tight text-charcoal max-w-2xl"
               style={{ fontSize: 'clamp(28px, 3vw, 36px)', lineHeight: 1.2 }}
             >
-              {about.pullQuote}
+              {t.pullQuote}
             </blockquote>
 
             {/* Forest accent bar */}
@@ -105,7 +109,7 @@ export default function About() {
 
             {/* Body paragraphs */}
             <div className="space-y-5">
-              {aboutParagraphs.map((para, i) => (
+              {t.paragraphs.map((para, i) => (
                 <p key={i} className="text-base text-slate leading-[1.68]">
                   {para}
                 </p>
@@ -114,10 +118,10 @@ export default function About() {
 
             {/* Core expertise */}
             <p className="text-xs tracking-widest text-warm-gray uppercase mt-12 mb-4">
-              {about.expertiseLabel}
+              {t.expertiseLabel}
             </p>
             <div className="grid grid-cols-2 gap-x-8 gap-y-2.5">
-              {expertise.map((item) => (
+              {t.expertise.map((item) => (
                 <div key={item} className="flex items-center gap-2">
                   <span
                     aria-hidden="true"

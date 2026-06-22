@@ -2,9 +2,10 @@
 
 import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
-import { contact, contactLinks } from '@/lib/data'
+import { useLanguage } from '@/context/LanguageContext'
+import { translations } from '@/lib/i18n'
 
-// Button styling keyed by contactLink id — portfolio link is excluded from this section
+// Button styling keyed by contactLink id
 const buttonVariants: Record<string, string> = {
   whatsapp: 'bg-forest text-white hover:bg-olive',
   email:    'border border-stone text-charcoal hover:bg-sand',
@@ -13,6 +14,8 @@ const buttonVariants: Record<string, string> = {
 
 export default function Contact() {
   const contentRef = useRef<HTMLDivElement>(null)
+  const { lang } = useLanguage()
+  const t = translations[lang].contact
 
   useEffect(() => {
     const el = contentRef.current
@@ -32,7 +35,7 @@ export default function Contact() {
     return () => observer.disconnect()
   }, [])
 
-  const buttons = contactLinks.filter((l) => l.id !== 'portfolio')
+  const buttons = t.links.filter((l) => l.id !== 'portfolio')
 
   return (
     <section id="contact" className="bg-off-white">
@@ -45,7 +48,7 @@ export default function Contact() {
         >
           {/* Eyebrow */}
           <p className="text-xs tracking-widest text-forest uppercase font-medium mb-12">
-            {contact.eyebrow}
+            {t.eyebrow}
           </p>
 
           {/* Headline */}
@@ -53,7 +56,7 @@ export default function Contact() {
             className="font-semibold tracking-tight text-charcoal max-w-3xl"
             style={{ fontSize: 'clamp(40px, 5vw, 64px)', lineHeight: 1.08 }}
           >
-            {contact.headline}
+            {t.headline}
           </h2>
 
           {/* Forest accent bar */}
@@ -61,7 +64,7 @@ export default function Contact() {
 
           {/* Subtext */}
           <p className="text-slate text-lg leading-relaxed max-w-xl mb-16">
-            {contact.subtext}
+            {t.subtext}
           </p>
 
           {/* Contact buttons */}
@@ -88,8 +91,8 @@ export default function Contact() {
 
         {/* Footer */}
         <footer className="flex items-center justify-between gap-6 max-md:flex-col max-md:items-start">
-          <p className="text-xs text-warm-gray">{contact.footerText}</p>
-          <p className="text-xs text-slate">{contact.footerCredit}</p>
+          <p className="text-xs text-warm-gray">{t.copyright}</p>
+          <p className="text-xs text-slate">{t.footerCredit}</p>
         </footer>
 
       </div>
