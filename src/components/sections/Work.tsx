@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from 'react'
 import type { CSSProperties } from 'react'
+import Image from 'next/image'
 import { caseStudies, work } from '@/lib/data'
 
 export default function Work() {
@@ -65,6 +66,17 @@ export default function Work() {
                   />
                 </div>
 
+                {/* Thumbnail */}
+                <div className="w-40 h-32 shrink-0 rounded overflow-hidden bg-charcoal">
+                  <Image
+                    src={study.image}
+                    alt={`${study.client} — ${study.title}`}
+                    width={160}
+                    height={128}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
+
                 {/* Middle col: client/tag, title, challenge, CTA */}
                 <div className="flex-1 flex flex-col gap-4">
                   <div className="flex items-center gap-3">
@@ -78,7 +90,7 @@ export default function Work() {
                   </h3>
                   <p className="text-sm text-slate leading-relaxed max-w-2xl">{study.challenge}</p>
                   <a
-                    href={study.link}
+                    href={`/work/${study.slug}`}
                     className="text-sm font-medium text-forest hover:text-olive transition-colors duration-150 w-fit"
                   >
                     {work.cta}
@@ -102,8 +114,16 @@ export default function Work() {
               {/* ── Mobile layout ──────────────────────────────────────── */}
               <div className="md:hidden flex flex-col gap-5">
 
-                {/* Image placeholder */}
-                <div className="h-40 bg-sand rounded" aria-hidden="true" />
+                {/* Hero image */}
+                <div className="h-44 rounded-sm overflow-hidden">
+                  <Image
+                    src={study.image}
+                    alt={`${study.client} — ${study.title}`}
+                    width={800}
+                    height={176}
+                    className="w-full h-full object-cover object-center"
+                  />
+                </div>
 
                 {/* Client/tag, title, challenge, CTA */}
                 <div className="flex flex-col gap-3">
@@ -117,7 +137,7 @@ export default function Work() {
                     {study.title}
                   </h3>
                   <p className="text-sm text-slate leading-relaxed">{study.challenge}</p>
-                  <a href={study.link} className="text-sm font-medium text-forest w-fit">
+                  <a href={`/work/${study.slug}`} className="text-sm font-medium text-forest w-fit">
                     {work.cta}
                   </a>
                 </div>

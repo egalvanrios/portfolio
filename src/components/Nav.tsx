@@ -26,7 +26,7 @@ export default function Nav() {
       <div className="max-w-[1440px] mx-auto px-20 max-md:px-5 h-16 flex items-center justify-between">
 
         <a
-          href="#hero"
+          href="/"
           className="font-semibold text-charcoal text-[18px] leading-none tracking-tight"
         >
           {navConfig.logo}
