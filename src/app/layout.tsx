@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { about, hero, siteUrl } from "@/lib/data";
 import { LanguageProvider } from "@/context/LanguageContext";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -39,6 +40,7 @@ export default function RootLayout({
         <LanguageProvider>
           {children}
         </LanguageProvider>
+        <GoogleAnalytics />
       </body>
     </html>
   );
